@@ -1,0 +1,22 @@
+{
+  "name": "prjapi",
+  "version": "1.0.0",
+  "description": "Projeto de API básica com Express voltada para estudos",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jurandiRiqueti1/prjApi.git"
+  },
+  "author": "Jurandi Riqueti Junior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jurandiRiqueti1/prjApi/issues"
+  },
+  "homepage": "https://github.com/jurandiRiqueti1/prjApi#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
