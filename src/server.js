@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const server = express();
-const port = 3000;
+const port = process.env.PORT;
 
 server.get("/teste/:id", (req, res) => (
     res.status(200).json({
