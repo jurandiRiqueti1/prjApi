@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors'
 
 //import do projeto
+import './shared/services/TranslationsYup'
 import { router } from './routes/index'
 
 const server = express();
