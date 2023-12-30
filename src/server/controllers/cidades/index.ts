@@ -1,5 +1,13 @@
-import * as control from './create'
+import * as control from './Create'
+import * as getAll from './GetAll'
+import * as getById from './GetById'
+import * as updateById from './UpdateById'
+import * as deleteById from './DeleteById'
 
 export const cidadesController = {
     ...control,
+    ...getAll,
+    ...getById,
+    ...updateById,
+    ...deleteById,
 }

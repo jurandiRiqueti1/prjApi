@@ -1,26 +1,16 @@
 import { Request, RequestHandler, Response } from 'express';
 import * as yup from 'yup';
+import { StatusCodes } from 'http-status-codes';
+
 import { validation } from '../../shared/middlewares';
 
 interface ICidade{
     nome: string;
-    estado: string;
-};
-
-interface IFilter{
-    filter?: string;
-    limit?: number;
 };
 
 export const createValidation = validation((getSchema) => ({
-    
-    query: getSchema<IFilter>(yup.object().shape({
-        filter: yup.string().required().min(3),
-    })),
-    
     body: getSchema<ICidade>(yup.object().shape({
-        nome: yup.string().required().min(3),
-        estado: yup.string().required().min(3),
+        nome: yup.string().required().min(3)
     })),
 }));
 
@@ -28,5 +18,5 @@ export const create = async (req: Request<{},{},ICidade>, res: Response) => {
     
     console.log(req.body);
 
-    return res.send('Criado');
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado');
 };

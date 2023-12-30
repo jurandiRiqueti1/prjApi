@@ -9,6 +9,10 @@ router.get('/', (req, res) => (
     res.status(200).end()
 ));
 
-router.post("/cidades", cidadesController.createValidation, cidadesController.create);
+router.get('/cidades', cidadesController.getAllValidation, cidadesController.getAll);
+router.get('/cidades/:id', cidadesController.getByIdValidation, cidadesController.getById);
+router.put('/cidades/:id', cidadesController.updateByIdValidation, cidadesController.updateById)
+router.post('/cidades', cidadesController.createValidation, cidadesController.create);
+router.delete('/cidades/:id', cidadesController.deleteByIdValidation, cidadesController.deleteById)
 
 export { router };
