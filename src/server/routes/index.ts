@@ -6,7 +6,7 @@ import {cidadesController} from './../controllers'
 const router = express.Router();
 
 router.get('/', (req, res) => (
-    res.status(200).send('Oih')
+    res.status(200).send(`NODE_ENV=${process.env.NODE_ENV}`)
 ));
 
 router.get('/cidades', cidadesController.getAllValidation, cidadesController.getAll);
