@@ -3,12 +3,13 @@ import * as yup from 'yup';
 import { StatusCodes } from 'http-status-codes';
 
 import { validation } from '../../shared/middlewares';
+import { ICidade } from '../../database/knex/models';
 
 interface IParamProps{
     id?: number;
 }
 
-interface IBodyProps{
+interface IBodyProps extends Omit<ICidade, 'id'>{
     nome: string;
 }
 
