@@ -9,9 +9,7 @@ interface IParamProps{
     id?: number;
 }
 
-interface IBodyProps extends Omit<ICidade, 'id'>{
-    nome: string;
-}
+interface IBodyProps extends Omit<ICidade, 'id'>{};
 
 export const updateByIdValidation = validation((getSchema) => ({
     params: getSchema<IParamProps>(yup.object().shape({
