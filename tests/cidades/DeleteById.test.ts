@@ -30,4 +30,13 @@ describe('Cidades - DeleteById', () => {
         expect(res1.body).toHaveProperty('errors.default');
     })
 
+    it('Tenta enviar uma request sem o id', async () => {
+
+        const res1 = await testServer
+            .delete('/cidades/caxias')
+            .send();
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+    })
+
 });

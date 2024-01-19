@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { validation } from '../../shared/middlewares';
 import { ICidade } from '../../database/knex/models';
-import { CidadesProvider } from '../../database/providers/cidades';
+import { cidadesProvider } from '../../database/providers/cidades';
 
 interface IBodyPros extends Omit<ICidade, 'id'> {};
 
@@ -16,7 +16,7 @@ export const createValidation = validation((getSchema) => ({
 
 export const create = async (req: Request<{},{},ICidade>, res: Response) => {
     
-    const result = await CidadesProvider.create(req.body);
+    const result = await cidadesProvider.create(req.body);
 
     if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
