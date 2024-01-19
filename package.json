@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "production": "node ./build/index.js",
-    "postinstall": "tsc",
     "test": "jest",
     "dev": "ts-node-dev ./src/index.ts",
     "knex:migrate": "knex --knexfile ./src/server/database/knex/Environment.ts migrate:latest",
