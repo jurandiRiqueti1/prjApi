@@ -1,7 +1,7 @@
 {
   "name": "prjapi",
   "version": "1.0.0",
-  "description": "Projeto de API básica com Express voltada para estudos",
+  "description": "Projeto de API com Express voltada para estudos",
   "main": "server.js",
   "scripts": {
     "postinstall": "tsc",
