@@ -4,6 +4,7 @@
   "description": "Projeto de API básica com Express voltada para estudos",
   "main": "server.js",
   "scripts": {
+    "postinstall": "tsc",
     "production": "node ./build/index.js",
     "test": "jest",
     "dev": "ts-node-dev ./src/index.ts",
