@@ -1,6 +1,6 @@
 import { ETableNames } from "../../ETableNames";
 import { Knex } from "../../knex";
-import { ICidade } from "../../knex/models";
+import { ICidade } from "../../models";
 
 export const getAll = async (page: number, limit: number, filter: string, id: number = 0): Promise<ICidade[] | Error> => {
     
