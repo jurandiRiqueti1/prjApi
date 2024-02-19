@@ -1,7 +1,7 @@
 //import libs
 import express from 'express';
 
-import {cidadesController} from './../controllers'
+import {cidadesController, pessoasController} from './../controllers'
 
 const router = express.Router();
 
@@ -25,5 +25,22 @@ router.post('/cidades', cidadesController.createValidation, cidadesController.cr
 
 //deleteById
 router.delete('/cidades/:id', cidadesController.deleteByIdValidation, cidadesController.deleteById)
+
+//ROTAS PESSOAS
+
+//getAll
+router.get('/pessoas', pessoasController.getAllValidation, pessoasController.getAll);
+
+//getById
+router.get('/pessoas/:id', pessoasController.getByIdValidation, pessoasController.getById);
+
+//updateById
+router.put('/pessoas/:id', pessoasController.updateByIdValidation, pessoasController.updateById);
+
+//create
+router.post('/pessoas', pessoasController.createValidation, pessoasController.create);
+
+//deleteById
+router.delete('/pessoas/:id', pessoasController.deleteByIdValidation, pessoasController.deleteById);
 
 export { router };

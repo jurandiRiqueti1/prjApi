@@ -5,7 +5,7 @@ export const count = async (filter = ''): Promise<number | Error> => {
 
     try {
         const [{count}] = await Knex(ETableNames.pessoa)
-            .where('nome', 'like', `%${filter}%`)
+            .where('nomeCompleto', 'like', `%${filter}%`)
             .count<[{count: number}]>('* as count');
         
         if (Number.isInteger(Number(count))) return Number(count);
