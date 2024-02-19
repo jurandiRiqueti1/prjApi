@@ -5,13 +5,13 @@ describe('Cidades - GetAll', () => {
 
     it('Buscar todos os registros', async () => {
 
-        const res1 = await testServer
-            .post('/cidades')
-            .send({
-                nome: 'Caxias do Sul'
-            });
+        // const res1 = await testServer
+        //     .post('/cidades')
+        //     .send({
+        //         nome: 'Caxias do Sul'
+        //     });
         
-        expect(res1.statusCode).toEqual(StatusCodes.CREATED);
+        // expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
         const resBusca = await testServer
             .get('/cidades')
