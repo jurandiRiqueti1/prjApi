@@ -6,13 +6,9 @@ export const create = async (pessoa: Omit<IPessoa, 'id'>): Promise<number | Erro
     
     try {
 
-        // const [{ count }] = await Knex(ETableNames.cidade)
-        //     .where('id', '=', pessoa.cidadeId)
-        //     .count<[{ count: number }]>('* as count');
-
-        const count = await Knex(ETableNames.cidade)
+        const [{ count }] = await Knex(ETableNames.cidade)
             .where('id', '=', pessoa.cidadeId)
-            .count<number>('* as count');
+            .count<[{ count: number }]>('* as count');
 
         if (count === 0){
             return new Error('A cidade informada não existe');

@@ -71,16 +71,103 @@ describe('Pessoas - Create', () => {
 
     });
 
-    it('Não pode conter valores nulos/vazios', async () => {
+    it('Tenta criar registro com nome curto', async () => {
 
         const res1 = await testServer
-            .post('/cidades')
+            .post('/pessoas')
             .send({
-                nome: null
+                nomeCompleto: 'te',
+                email: 'teste.teste@gmail.com',
+                cidadeId
             });
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
-        expect(res1.body).toHaveProperty('errorsResult.body.nome')
+        expect(res1.body).toHaveProperty('errorsResult.body.nomeCompleto');
+
+    });
+
+    it('Tenta criar registro com email inválido', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({
+                nomeCompleto: 'Teste Teste',
+                email: 'teste.teste.gmail.com',
+                cidadeId
+            });
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body).toHaveProperty('errorsResult.body.email');
+        
+    });
+
+    it('Tenta criar registro sem nomeCompleto', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({
+                email: 'teste.teste@gmail.com',
+                cidadeId
+            });
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body).toHaveProperty('errorsResult.body.nomeCompleto');
+        
+    });
+
+    it('Tenta criar registro sem email', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({
+                nomeCompleto: 'Teste Teste',
+                cidadeId
+            });
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body).toHaveProperty('errorsResult.body.email');
+        
+    });
+
+    it('Tenta criar registro sem cidadeId', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({
+                nomeCompleto: 'Teste Teste',
+                email: 'teste.teste@gmail.com'
+            });
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body).toHaveProperty('errorsResult.body.cidadeId');
+        
+    });
+
+    it('Tenta criar registro com cidadeId inválido', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({
+                nomeCompleto: 'Teste Teste',
+                email: 'teste.teste@gmail.com',
+                cidadeId: 99999
+            });
+
+        expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        expect(res1.body).toHaveProperty('errors.default');
+        
+    });
+
+    it('Tenta criar registro sem nenhuma propriedade', async () => {
+
+        const res1 = await testServer
+            .post('/pessoas')
+            .send({ });
+
+        expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
+        expect(res1.body).toHaveProperty('errorsResult.body.nomeCompleto');
+        expect(res1.body).toHaveProperty('errorsResult.body.cidadeId');
+        expect(res1.body).toHaveProperty('errorsResult.body.email');
 
     });
 
