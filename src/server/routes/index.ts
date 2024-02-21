@@ -1,7 +1,7 @@
 //import libs
 import express from 'express';
 
-import {cidadesController, pessoasController} from './../controllers'
+import {cidadesController, pessoasController, usuariosController} from './../controllers'
 
 const router = express.Router();
 
@@ -42,5 +42,13 @@ router.post('/pessoas', pessoasController.createValidation, pessoasController.cr
 
 //deleteById
 router.delete('/pessoas/:id', pessoasController.deleteByIdValidation, pessoasController.deleteById);
+
+//ROTAS USUARIOS
+
+//signIn
+router.post('/entrar', usuariosController.signInValidation, usuariosController.signIn);
+
+//signUp
+router.post('/cadastrar', usuariosController.signUpValidation, usuariosController.signUp);
 
 export { router };
