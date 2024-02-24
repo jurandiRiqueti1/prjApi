@@ -6,13 +6,36 @@ describe('Pessoas - UpdateById', () => {
 
     let cidadeId: number | undefined = undefined;
 
+    let token: string | undefined = undefined;
+
     beforeAll(async () => {
+
+        const email = 'pessoas-updatebyid@gmail.com'
+
+        await testServer
+            .post('/cadastrar')
+            .send({
+                nome: "Teste Teste",
+                email: email,
+                senha: '12345678'
+            });
+
+        const resSignIn = await testServer
+            .post('/entrar')
+            .send({
+                email: email,
+                senha: '12345678'
+            });
+
+        token = resSignIn.body.accessToken;
+
         const resCidade = await testServer
             .post('/cidades')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nome: 'cidadeTeste'
             });                
-        
+
         cidadeId = resCidade.body;
     });
     
@@ -20,6 +43,7 @@ describe('Pessoas - UpdateById', () => {
         
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 email: 'teste.teste@gmail.com',
@@ -30,6 +54,7 @@ describe('Pessoas - UpdateById', () => {
 
         const resAtualizada = await testServer
             .put(`/pessoas/${res1.body}`)
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste da Silva',
                 email: 'teste.teste.updated@gmail.com',
@@ -43,6 +68,7 @@ describe('Pessoas - UpdateById', () => {
         
         const res1 = await testServer
             .put('/pessoas/99999')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste da Silva',
                 email: 'teste.teste@gmail.com',

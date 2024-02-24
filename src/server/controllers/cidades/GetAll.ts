@@ -26,7 +26,7 @@ export const getAll = async (req: Request<{},{},{}, IQueryProps>, res: Response)
     const page = req.query.page || 1;
     const limit = req.query.limit || 7;
     const filter = req.query.filter || '';
-    const id =  Number(req.query.id);
+    const id =  Number(req.query.id || 0);
 
     const result = await cidadesProvider.getAll(page, limit, filter, id);
     const count = await cidadesProvider.count(filter);

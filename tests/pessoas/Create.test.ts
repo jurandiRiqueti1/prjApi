@@ -4,14 +4,36 @@ import { testServer } from "../jest.setup";
 describe('Pessoas - Create', () => {
 
     let cidadeId: number | undefined = undefined;
+    let token: string | undefined = undefined;
 
     beforeAll(async () => {
+
+        const email = 'pessoas-create@gmail.com'
+
+        await testServer
+            .post('/cadastrar')
+            .send({
+                nome: "Teste Teste",
+                email: email,
+                senha: '12345678'
+            });
+
+        const resSignIn = await testServer
+            .post('/entrar')
+            .send({
+                email: email,
+                senha: '12345678'
+            });
+
+        token = resSignIn.body.accessToken;
+
         const resCidade = await testServer
             .post('/cidades')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nome: 'cidadeTeste'
             });                
-        
+
         cidadeId = resCidade.body;
     });
 
@@ -19,6 +41,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste 1',
                 email: 'teste.teste@gmail.com',
@@ -34,6 +57,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste 2',
                 email: 'teste.teste.2@gmail.com',
@@ -49,6 +73,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 email: 'teste.teste.duplicado@gmail.com',
@@ -60,6 +85,7 @@ describe('Pessoas - Create', () => {
 
         const res2 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Duplicado',
                 email: 'teste.teste.duplicado@gmail.com',
@@ -75,6 +101,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'te',
                 email: 'teste.teste@gmail.com',
@@ -90,6 +117,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 email: 'teste.teste.gmail.com',
@@ -105,6 +133,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 email: 'teste.teste@gmail.com',
                 cidadeId
@@ -119,6 +148,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 cidadeId
@@ -133,6 +163,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 email: 'teste.teste@gmail.com'
@@ -147,6 +178,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({
                 nomeCompleto: 'Teste Teste',
                 email: 'teste.teste@gmail.com',
@@ -162,6 +194,7 @@ describe('Pessoas - Create', () => {
 
         const res1 = await testServer
             .post('/pessoas')
+            .set({authorization: `Bearer ${token}`})
             .send({ });
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
